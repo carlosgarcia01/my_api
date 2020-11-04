@@ -1,9 +1,17 @@
 const app = require('./server');
-const http = require('http');
+const axios = require('axios');
 require('./database');
 
 /* routes */
 app.use('/api',(req,res)=>{
+  axios.get('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY')
+    .then(response => {
+      console.log(response.data.url);
+      console.log(response.data.explanation);
+    })
+    .catch(error => {
+      console.log(error);
+    });
   res.json({message:"Hello"})
 });
 
